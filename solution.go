@@ -60,7 +60,7 @@ func (s *Solution) CountMark() int64 {
 		s.mark[i].Second = int(fg - sg)
 	}
 
-	return mark + s.CountParameter()
+	return mark + s.CountParamForDependent()
 }
 
 //PartIndependent parts independent vertexes in hungry form
@@ -79,4 +79,16 @@ func (s *Solution) PartIndependent(groupSize int) {
 		s.Vector[s.mark[i].First] = true
 	}
 
+}
+
+func (s *Solution) CountParamForDependent() int64 {
+	var param int64 = 0
+	for i := s.Gr.GetAmountOfIndependent(); i < len(s.Vector); i++ {
+		for _, v := range s.Gr.GetEdges(i) {
+			if s.Vector[i] != s.Vector[v] && v > s.Gr.GetAmountOfIndependent() {
+				param++
+			}
+		}
+	}
+	return param / 2
 }
