@@ -1,4 +1,4 @@
-module github.com/Rakiiii
+module github.com/Rakiiii/goBipartitonLocalSearch
 
 go 1.13
 
