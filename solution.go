@@ -45,6 +45,7 @@ func (s *Solution) SetDependentAsBinnary(num int64) {
 
 //CountMark returns low mark of possible partition of independent vertrexes
 func (s *Solution) CountMark() int64 {
+	s.mark = make([]pairlib.IntPair, s.Gr.GetAmountOfIndependent())
 	var mark int64 = 0
 	for i := 0; i < s.Gr.GetAmountOfIndependent(); i++ {
 		var fg int64 = 0
