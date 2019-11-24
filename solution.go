@@ -90,7 +90,7 @@ func (s *Solution) PartIndependent(groupSize int) bool {
 		}
 	}
 
-	if groupSize-groupTwoSize < 0 {
+	if groupSize-groupTwoSize < 0 || groupSize-groupTwoSize > s.Gr.GetAmountOfIndependent() {
 		return false
 	}
 	for i := 0; i < groupSize-groupTwoSize; i++ {
