@@ -1,6 +1,10 @@
 package bipartitonlocalsearchlib
 
-import pairlib "github.com/Rakiiii/goPair"
+import (
+	"math"
+
+	pairlib "github.com/Rakiiii/goPair"
+)
 
 //Solution is struct that represent the solution of graph bipartition
 //contains graph it self and vector with solution with value
@@ -84,7 +88,7 @@ func (s *Solution) PartIndependent(groupSize int) bool {
 		}
 	}
 
-	if groupSize-groupTwoSize >= len(s.mark) {
+	if math.Abs(float64(groupSize-groupTwoSize)) >= float64(len(s.mark)) {
 		return false
 	}
 
