@@ -13,7 +13,7 @@ func TestSetDependentAsBinnary(t *testing.T) {
 	var sol Solution
 	sol.Init(&graph)
 
-	sol.SetDependentAsBinnary(7)
+	sol.SetDependentAsBinnary(0)
 	fmt.Println("param:", sol.CountParamForDependent(), "| mark:", sol.CountMark())
 
 	sol.PartIndependent(4)
