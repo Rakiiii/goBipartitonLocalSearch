@@ -6,5 +6,7 @@ github.com/Rakiiii/goGraph v0.2.2 h1:ewz+KTd/VUmjzp9YDTzJ9ShzyL2pgoRwR78V9+3er4U
 github.com/Rakiiii/goGraph v0.2.2/go.mod h1:bYAV6bGI3W/Q2pbO8wpCVywSbfjNNbvQ41WEdop3YAI=
 github.com/Rakiiii/goPair v0.0.0-20191123194235-c325a5a98042 h1:M9rdRPnbChkp/2feFyg96qj8zQtnR8rVV4TJ2c+p0Xs=
 github.com/Rakiiii/goPair v0.0.0-20191123194235-c325a5a98042/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
+github.com/Rakiiii/goPair v0.0.2 h1:DtZiEtWgOr6VhgFE/EbMo7R3u78TZfPYk8ny8EB4I7M=
+github.com/Rakiiii/goPair v0.0.2/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
 github.com/Rakiiii/goSort v0.0.1 h1:LFZm5bcoHjtFjV53f+VV3HfM+AwOTZMQrrEQy2JNY6Y=
 github.com/Rakiiii/goSort v0.0.1/go.mod h1:ir50upjpORk43rGVd9Kt43JRoCWmtWiLmqEKnmO3EPw=
