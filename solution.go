@@ -71,7 +71,7 @@ func (s *Solution) CountMark() int64 {
 			mark += fg
 		}
 		s.mark[i].First = i
-		s.mark[i].Second = int(fg - sg)
+		s.mark[i].Second = int(sg - fg)
 	}
 
 	return mark + s.CountParamForDependent()
