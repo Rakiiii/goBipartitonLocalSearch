@@ -73,7 +73,7 @@ func (s *Solution) CountMark() int64 {
 }
 
 //PartIndependent parts independent vertexes in hungry form
-func (s *Solution) PartIndependent(groupSize int) {
+func (s *Solution) PartIndependent(groupSize int) bool {
 	s.mark = pairlib.QuicksortIntPairSecond(s.mark)
 
 	groupTwoSize := 0
@@ -84,12 +84,17 @@ func (s *Solution) PartIndependent(groupSize int) {
 		}
 	}
 
+	if groupSize-groupTwoSize >= len(s.mark) {
+		return false
+	}
+
 	for i := 0; i < groupSize-groupTwoSize; i++ {
 		s.Vector[s.mark[i].First] = true
 	}
-
+	return true
 }
 
+//CountParamForDependent counting param for subgraph containted dependent vertexes
 func (s *Solution) CountParamForDependent() int64 {
 	var param int64 = 0
 	for i := s.Gr.GetAmountOfIndependent(); i < len(s.Vector); i++ {
