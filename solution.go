@@ -57,14 +57,17 @@ func (s *Solution) CountMark() int64 {
 		var sg int64 = 0
 
 		for _, v := range s.Gr.GetEdges(i) {
+			//fmt.Println("vertex:", v)
 			switch {
-			case v >= s.Gr.GetAmountOfIndependent():
+			case v < s.Gr.GetAmountOfIndependent():
+				//fmt.Println("out of index")
 			case !s.Vector[v]:
 				fg++
 			case s.Vector[v]:
 				sg++
 			}
 		}
+		//fmt.Println("fg:", fg, " sg:", sg)
 		if fg > sg {
 			mark += sg
 		} else {
