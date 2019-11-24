@@ -82,7 +82,7 @@ func (s *Solution) CountMark() int64 {
 
 //PartIndependent parts independent vertexes in hungry form
 func (s *Solution) PartIndependent(groupSize int) bool {
-	s.mark = pairlib.QuicksortIntPairSecond(s.mark)
+	s.mark = pairlib.ReversIntPairSlice(pairlib.QuicksortIntPairSecond(s.mark))
 
 	groupTwoSize := 0
 
