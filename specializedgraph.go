@@ -11,7 +11,7 @@ func (g *Graph) GetAmountOfIndependent() int {
 	return g.amountOfIndependent
 }
 
-func (g *Graph) NumIndependent() {
+func (g *Graph) NumIndependent() []int {
 	colorSet := make([]bool, g.AmountOfVertex())
 	amountOfIndependent := 0
 
@@ -41,6 +41,7 @@ func (g *Graph) NumIndependent() {
 	g.amountOfIndependent = amountOfIndependent
 
 	g.RenumVertex(newOrd)
+	return newOrd
 }
 
 func (g *Graph) ParseGraph(path string) error {
