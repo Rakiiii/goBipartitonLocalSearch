@@ -44,6 +44,7 @@ func (s *Solution) SetDependentAsBinnary(num int64) {
 		} else {
 			s.Vector[i] = false
 		}
+		num /= 2
 	}
 }
 
