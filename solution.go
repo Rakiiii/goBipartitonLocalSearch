@@ -5,10 +5,17 @@ import pairlib "github.com/Rakiiii/goPair"
 //Solution is struct that represent the solution of graph bipartition
 //contains graph it self and vector with solution with value
 type Solution struct {
-	Value  int
+	Value  int64
 	Vector []bool
 	Gr     *Graph
 	mark   []pairlib.IntPair
+}
+
+//Init initialized solution for graph
+func (s *Solution) Init(g *Graph) {
+	s.Value = -1
+	s.Gr = g
+	s.Vector = make([]bool, g.AmountOfVertex())
 }
 
 //CountParameter return amount of edges between groups for dependent grpah vartex
@@ -21,6 +28,7 @@ func (s *Solution) CountParameter() int64 {
 			}
 		}
 	}
+	s.Value = param / 2
 	return param / 2
 }
 
