@@ -1,8 +1,6 @@
 package bipartitonlocalsearchlib
 
 import (
-	"math"
-
 	pairlib "github.com/Rakiiii/goPair"
 )
 
@@ -92,10 +90,9 @@ func (s *Solution) PartIndependent(groupSize int) bool {
 		}
 	}
 
-	if math.Abs(float64(groupSize-groupTwoSize)) >= float64(len(s.mark)) {
+	if groupSize-groupTwoSize < 0 {
 		return false
 	}
-
 	for i := 0; i < groupSize-groupTwoSize; i++ {
 		s.Vector[s.mark[i].First] = true
 	}
