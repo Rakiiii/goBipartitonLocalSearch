@@ -50,12 +50,12 @@ func (g *Graph) NumIndependent() []int {
 
 //HungryNumIndependent realization of hugnry search algorithm of max independent vertex set with renumbering prev set of vertex 
 func (g *Graph)HungryNumIndependent()[]int{
-	sortedOrd := make([]goTuple.IntTuple,g.AmountOfVertex())
+	sortedOrd := make([]gotuple.IntTuple,g.AmountOfVertex())
 
 	for i := 0 ; i < g.AmountOfVertex() ; i ++{
-		newOrd[i].First = i
-		newOrd[i].Second = len(g.GetEdges(i))
-		newOrd[i].Third = 0
+		sortedOrd[i].First = i
+		sortedOrd[i].Second = len(g.GetEdges(i))
+		sortedOrd[i].Third = 0
 	}
 
 	sortedOrd = gotuple.QuicksortIntTupleSecond(sortedOrd)
@@ -78,7 +78,7 @@ func (g *Graph)HungryNumIndependent()[]int{
 		}
 	}
 
-	g.AmountOfVertex = counter
+	g.amountOfIndependent = counter
 
 	for i,vertex := range sortedOrd{
 		if vertex.Third == 1{
