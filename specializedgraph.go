@@ -68,7 +68,7 @@ func (g *Graph)HungryNumIndependent()[]int{
 	newOrd := make([]int,g.AmountOfVertex())
 	counter := 0 
 	 
-	for i, vertex := range sortedOrd{
+	for _, vertex := range sortedOrd{
 		if vertex.Third == 0{
 			newOrd[counter] = vertex.First
 			counter ++
@@ -80,7 +80,7 @@ func (g *Graph)HungryNumIndependent()[]int{
 
 	g.amountOfIndependent = counter
 
-	for i,vertex := range sortedOrd{
+	for _,vertex := range sortedOrd{
 		if vertex.Third == 1{
 			newOrd[counter] = vertex.First
 		}
