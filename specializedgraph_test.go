@@ -30,3 +30,10 @@ func TestParseGraph(t *testing.T) {
 
 	fmt.Println("am of ver:", graph.AmountOfVertex())
 }
+
+func TestHungryNumIndependent(t *testing.T){
+
+	var graph Graph
+	graph.ParseGraph("test_grSmall")
+	fmt.Println(graph.HungryNumIndependent())
+}
