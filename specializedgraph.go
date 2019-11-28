@@ -2,6 +2,7 @@ package bipartitonlocalsearchlib
 
 import graphlib "github.com/Rakiiii/goGraph"
 import gotuple "github.com/Rakiiii/goTuple"
+import "fmt"
 
 //Graph if specialization of grpah for biderectional local search
 type Graph struct {
@@ -60,10 +61,20 @@ func (g *Graph)HungryNumIndependent()[]int{
 
 	sortedOrd = gotuple.QuicksortIntTupleSecond(sortedOrd)
 
+	/*for _,i := range sortedOrd{
+		fmt.Println(i.First," ",i.Second," ",i.Third)
+	}*/
+
+	fmt.Println()
+
 	optPointers := make([]int,g.AmountOfVertex())
 	for i,num := range sortedOrd{
 		optPointers[num.First] = i
 	}
+
+	/*for i,v := range optPointers{
+		fmt.Println(i," ",v)
+	}*/
 
 	newOrd := make([]int,g.AmountOfVertex())
 	counter := 0 
@@ -83,6 +94,7 @@ func (g *Graph)HungryNumIndependent()[]int{
 	for _,vertex := range sortedOrd{
 		if vertex.Third == 1{
 			newOrd[counter] = vertex.First
+			counter++
 		}
 	}
 
