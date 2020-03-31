@@ -49,3 +49,15 @@ func TestHungryNumIndependent(t *testing.T){
 		fmt.Println(i," | ",graph.GetEdges(i))
 	}
 }
+
+func TestNumIndependent(t *testing.T){
+
+	fmt.Println("NumIndependentTest")
+	var graph Graph
+	graph.ParseGraph("test_grSmall")
+	fmt.Println(graph.NumIndependent()," ",graph.GetAmountOfIndependent())
+	fmt.Println()
+	for i := 0; i < graph.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",graph.GetEdges(i))
+	}
+}
