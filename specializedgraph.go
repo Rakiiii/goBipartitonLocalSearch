@@ -17,7 +17,7 @@ func (g *Graph) GetAmountOfIndependent() int {
 
 //NumIndependent renumberring vertex with some independetn subset of vertex
 func (g *Graph) NumIndependent() []int {
-	colorSet := make([]bool, g.AmountOfVertex())
+	/*colorSet := make([]bool, g.AmountOfVertex())
 	amountOfIndependent := 0
 
 	for i := 0; i < g.AmountOfVertex(); i++ {
@@ -34,6 +34,37 @@ func (g *Graph) NumIndependent() []int {
 	p2 := amountOfIndependent
 	for i, flag := range colorSet {
 		if flag {
+			newOrd[p2] = i
+			p2++
+
+		} else {
+			newOrd[p1] = i
+			p1++
+		}
+	}
+
+	g.amountOfIndependent = amountOfIndependent
+
+	g.RenumVertex(newOrd)
+	return newOrd*/
+	colorSet := make([]int, g.AmountOfVertex())
+	amountOfIndependent := 0
+
+	for i := 0; i < g.AmountOfVertex(); i++ {
+		if colorSet[i] == 0 {
+			amountOfIndependent++
+			colorSet[i] = 1
+			for _, v := range g.GetEdges(i) {
+				colorSet[v] = 2
+			}
+		}
+	}
+
+	newOrd := make([]int, g.AmountOfVertex())
+	p1 := 0
+	p2 := amountOfIndependent
+	for i, flag := range colorSet {
+		if flag == 1 {
 			newOrd[p2] = i
 			p2++
 
@@ -119,3 +150,10 @@ func (g *Graph) ParseGraph(path string) error {
 	}
 	return nil
 }
+
+/*func (g *Graph)GetDependentGraph()Graph{
+	var newGraph graphlib.Graph
+	if(amountOfIndependent <= 0)return *g
+
+	for
+}*/
