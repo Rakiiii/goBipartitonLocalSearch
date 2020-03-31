@@ -17,36 +17,7 @@ func (g *Graph) GetAmountOfIndependent() int {
 
 //NumIndependent renumberring vertex with some independetn subset of vertex
 func (g *Graph) NumIndependent() []int {
-	/*colorSet := make([]bool, g.AmountOfVertex())
-	amountOfIndependent := 0
-
-	for i := 0; i < g.AmountOfVertex(); i++ {
-		if !colorSet[i] {
-			amountOfIndependent++
-			for _, v := range g.GetEdges(i) {
-				colorSet[v] = true
-			}
-		}
-	}
-
-	newOrd := make([]int, g.AmountOfVertex())
-	p1 := 0
-	p2 := amountOfIndependent
-	for i, flag := range colorSet {
-		if flag {
-			newOrd[p2] = i
-			p2++
-
-		} else {
-			newOrd[p1] = i
-			p1++
-		}
-	}
-
-	g.amountOfIndependent = amountOfIndependent
-
-	g.RenumVertex(newOrd)
-	return newOrd*/
+	
 	colorSet := make([]int, g.AmountOfVertex())
 	amountOfIndependent := 0
 
@@ -103,10 +74,6 @@ func (g *Graph)HungryNumIndependent()[]int{
 		optPointers[num.First] = i
 	}
 
-	/*for i,v := range optPointers{
-		fmt.Println(i," ",v)
-	}*/
-
 	newOrd := make([]int,g.AmountOfVertex())
 	counter := 0 
 	 
@@ -151,6 +118,7 @@ func (g *Graph) ParseGraph(path string) error {
 	return nil
 }
 
+//GetDependentGraph returns type Graph that contains graph of denpendent vertex
 func (g *Graph)GetDependentGraph()Graph{
 	var newGraph Graph
 	if(g.amountOfIndependent <= 0){
