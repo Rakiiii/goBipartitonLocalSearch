@@ -1,7 +1,6 @@
-package main
+package lspartitioninglib
 
 import (
-	bipartitonlocalsearchlib "github.com/Rakiiii/goBipartitonLocalSearch"
 	"sync"
 	"log"
 	"math"
@@ -12,14 +11,14 @@ type SafeValue struct {
 	Mux   sync.Mutex
 }
 
-func LSPartiotionAlgorithm(gr *bipartitonlocalsearchlib.Graph, sol *bipartitonlocalsearchlib.Solution, groupSize int, number int64) *bipartitonlocalsearchlib.Solution {
+func LSPartiotionAlgorithm(gr *Graph, sol *Solution, groupSize int, number int64) *Solution {
 	log.Println("Check number:", number)
 
 	if float64(number) >= math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent())) {
 		log.Println("finish:", math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent())))
 		return sol
 	}
-	var newSol bipartitonlocalsearchlib.Solution
+	var newSol Solution
 
 	log.Println("solution constructed")
 
@@ -32,10 +31,10 @@ func LSPartiotionAlgorithm(gr *bipartitonlocalsearchlib.Graph, sol *bipartitonlo
 		log.Println("nil solution removed")
 		if flag := newSol.PartIndependent(groupSize); flag {
 			log.Println("better param:", newSol.CountParameter())
-			return partiotion(gr, &newSol, groupSize, number+1)
+			return LSPartiotionAlgorithm(gr, &newSol, groupSize, number+1)
 		} else {
 			log.Println("invalid disb for:", number)
-			return partiotion(gr, nil, groupSize, number+1)
+			return LSPartiotionAlgorithm(gr, nil, groupSize, number+1)
 		}
 	}
 	if mark < sol.CountParameter() {
@@ -43,7 +42,7 @@ func LSPartiotionAlgorithm(gr *bipartitonlocalsearchlib.Graph, sol *bipartitonlo
 		if flag := newSol.PartIndependent(groupSize); flag {
 			if newSol.CountParameter() < sol.CountParameter() {
 				log.Println("better param:", newSol.Value)
-				return partiotion(gr, &newSol, groupSize, number+1)
+				return LSPartiotionAlgorithm(gr, &newSol, groupSize, number+1)
 			} else {
 				log.Println("low param for:", number, " new param:", newSol.Value, " old param:", sol.Value)
 			}
@@ -53,14 +52,14 @@ func LSPartiotionAlgorithm(gr *bipartitonlocalsearchlib.Graph, sol *bipartitonlo
 	} else {
 		log.Println("low mark for:", number)
 	}
-	return partiotion(gr, sol, groupSize, number+1)
+	return LSPartiotionAlgorithm(gr, sol, groupSize, number+1)
 
 }
 
-func CheckPartition(graph *bipartitonlocalsearchlib.Graph, sol *bipartitonlocalsearchlib.Solution, groupSize int, number int64) *bipartitonlocalsearchlib.Solution {
+func CheckPartition(graph *Graph, sol *Solution, groupSize int, number int64) *Solution {
 	log.Println("Check number:", number)
 
-	var newSol bipartitonlocalsearchlib.Solution
+	var newSol Solution
 
 	log.Println("solution constructed")
 
@@ -98,12 +97,12 @@ func CheckPartition(graph *bipartitonlocalsearchlib.Graph, sol *bipartitonlocals
 	return sol
 }
 
-func AsyncCheckPartitionInRange(start int64, end int64, val *SafeValue, wg *sync.WaitGroup, ch chan *bipartitonlocalsearchlib.Solution,
-	graph *bipartitonlocalsearchlib.Graph, groupSize int) {
+func AsyncCheckPartitionInRange(start int64, end int64, val *SafeValue, wg *sync.WaitGroup, ch chan *Solution,
+	graph *Graph, groupSize int) {
 		log.Println("start new goroutine")
 	defer wg.Done()
 	
-	var sol *bipartitonlocalsearchlib.Solution 
+	var sol *Solution 
 	
 	for start <= end {
 
@@ -126,8 +125,8 @@ func AsyncCheckPartitionInRange(start int64, end int64, val *SafeValue, wg *sync
 
 }
 
-func CheckPartitionInRange(start int64, end int64, graph *bipartitonlocalsearchlib.Graph, groupSize int) *bipartitonlocalsearchlib.Solution {
-	var sol *bipartitonlocalsearchlib.Solution
+func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) *Solution {
+	var sol *Solution
 	for start <= end {
 		sol = CheckPartition(graph, sol, groupSize, start)
 		start++
