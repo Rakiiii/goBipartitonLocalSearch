@@ -61,3 +61,41 @@ func TestNumIndependent(t *testing.T){
 		fmt.Println(i," | ",graph.GetEdges(i))
 	}
 }
+
+func TestGetDependentGraph1(t *testing.T){
+
+	fmt.Println("GetDependentGraphTestWithHI")
+	var graph Graph
+	graph.ParseGraph("test_grSmall")
+	for i := 0; i < graph.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",graph.GetEdges(i))
+	}
+	fmt.Println(graph.HungryNumIndependent()," ",graph.GetAmountOfIndependent())
+	fmt.Println()
+	for i := 0; i < graph.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",graph.GetEdges(i))
+	}
+	newgr := graph.GetDependentGraph()
+	for i := 0; i < newgr.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",newgr.GetEdges(i))
+	}
+}
+
+func TestGetDependentGraph2(t *testing.T){
+
+	fmt.Println("GetDependentGraphTestWithHI")
+	var graph Graph
+	graph.ParseGraph("test_grSmall")
+	for i := 0; i < graph.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",graph.GetEdges(i))
+	}
+	fmt.Println(graph.NumIndependent()," ",graph.GetAmountOfIndependent())
+	fmt.Println()
+	for i := 0; i < graph.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",graph.GetEdges(i))
+	}
+	newgr := graph.GetDependentGraph()
+	for i := 0; i < newgr.AmountOfVertex(); i++ {
+		fmt.Println(i," | ",newgr.GetEdges(i))
+	}
+}
