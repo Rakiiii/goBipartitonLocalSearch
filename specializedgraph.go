@@ -64,7 +64,7 @@ func (g *Graph) NumIndependent() []int {
 	p1 := 0
 	p2 := amountOfIndependent
 	for i, flag := range colorSet {
-		if flag == 1 {
+		if flag == 2 {
 			newOrd[p2] = i
 			p2++
 
@@ -151,9 +151,23 @@ func (g *Graph) ParseGraph(path string) error {
 	return nil
 }
 
-/*func (g *Graph)GetDependentGraph()Graph{
-	var newGraph graphlib.Graph
-	if(amountOfIndependent <= 0)return *g
+func (g *Graph)GetDependentGraph()Graph{
+	var newGraph Graph
+	if(g.amountOfIndependent <= 0){
+		return *g
+	}
 
-	for
-}*/
+	for i := g.GetAmountOfIndependent();i < g.AmountOfVertex(); i++{
+		newSet := make([]int,0)
+		for _,v := range g.GetEdges(i){
+			fmt.Println(v)
+			if v > g.GetAmountOfIndependent(){
+				newSet = append(newSet,v-g.GetAmountOfIndependent())
+			}
+		}
+	
+		newGraph.AddVertexWithEdges(newSet)
+	}
+
+	return newGraph
+}
