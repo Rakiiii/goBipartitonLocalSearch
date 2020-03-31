@@ -1,4 +1,4 @@
-package bipartitonlocalsearchlib
+package lspartitioninglib
 
 import (
 	"fmt"

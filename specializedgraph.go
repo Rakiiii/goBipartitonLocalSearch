@@ -1,4 +1,4 @@
-package bipartitonlocalsearchlib
+package lspartitioninglib
 
 import graphlib "github.com/Rakiiii/goGraph"
 import gotuple "github.com/Rakiiii/goTuple"
