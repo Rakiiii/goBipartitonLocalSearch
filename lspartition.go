@@ -179,5 +179,5 @@ func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solut
 			log.Println("low mark for:", it)
 		}
 	}
-	return sol
+	return newSol
 }
