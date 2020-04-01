@@ -133,3 +133,49 @@ func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) 
 	}
 	return sol
 }
+
+func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solution {
+	log.Println("Check number:", number)
+
+	var newSol Solution
+	solFlag := false
+
+	log.Println("solution constructed")
+
+	for start < end;start++{
+
+		newSol.Init(gr)
+		newSol.SetDependentAsBinnary(start)
+		mark := newSol.CountMark()
+		log.Println("mark:", mark)
+
+		if solFlag{
+			log.Println("nil solution removed")
+			if flag := newSol.PartIndependent(groupSize); flag {
+				log.Println("better param:", newSol.CountParameter())
+				solFlag = true
+				sol = &newSol
+				continue
+			} else {
+				log.Println("invalid disb for:", number)
+				continue
+			}
+		}
+		if mark < sol.CountParameter() {
+			log.Println("better mark for :", sol.Vector)
+			if flag := newSol.PartIndependent(groupSize); flag {
+				if newSol.CountParameter() < sol.CountParameter() {
+					log.Println("better param:", newSol.Value)
+					sol = &newSol
+					continue
+				} else {
+					log.Println("low param for:", number, " new param:", newSol.Value, " old param:", sol.Value)
+				}
+			} else {
+				log.Println("invalid disb for:", number)
+			}
+		} else {
+			log.Println("low mark for:", number)
+		}
+	}
+}
