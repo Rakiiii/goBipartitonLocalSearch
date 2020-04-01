@@ -135,12 +135,12 @@ func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) 
 }
 
 func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solution {
-	var newSol Solution
 	solFlag := false
 
 	var it int64 	
 
 	for it = 0;it < int64(gr.AmountOfVertex()-gr.GetAmountOfIndependent());it++{
+		var newSol Solution
 		log.Println("Check number:", it)
 
 		newSol.Init(gr)
