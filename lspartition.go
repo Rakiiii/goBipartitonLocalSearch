@@ -135,12 +135,12 @@ func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) 
 }
 
 func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solution {
-	solFlag := false
+	
 
 	var it int64 	
 
-	for it = 0;it < int64(gr.AmountOfVertex()-gr.GetAmountOfIndependent());it++{
-		var newSol Solution
+	for it = 0;it < int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent())));it++{ 
+		newSol := new(Solution)
 		log.Println("Check number:", it)
 
 		newSol.Init(gr)
@@ -150,12 +150,11 @@ func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solut
 		
 		log.Println("mark:", mark)
 
-		if solFlag{
+		if sol == nil{
 			log.Println("nil solution removed")
 			if flag := newSol.PartIndependent(groupSize); flag {
 				log.Println("better param:", newSol.CountParameter())
-				solFlag = true
-				sol = &newSol
+				sol = newSol
 				continue
 			} else {
 				log.Println("invalid disb for:", it)
@@ -167,7 +166,7 @@ func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solut
 			if flag := newSol.PartIndependent(groupSize); flag {
 				if newSol.CountParameter() < sol.CountParameter() {
 					log.Println("better param:", newSol.Value)
-					sol = &newSol
+					sol = newSol
 					continue
 				} else {
 					log.Println("low param for:", it, " new param:", newSol.Value, " old param:", sol.Value)
