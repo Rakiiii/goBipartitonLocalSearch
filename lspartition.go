@@ -135,18 +135,21 @@ func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) 
 }
 
 func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solution {
-	log.Println("Check number:", number)
+	
 
 	var newSol Solution
 	solFlag := false
 
-	log.Println("solution constructed")
+	var it int64 	
 
-	for start < end;start++{
+	for it = 0;it < int64(gr.AmountOfVertex()-gr.GetAmountOfIndependent());it++{
+		log.Println("Check number:", it)
 
 		newSol.Init(gr)
-		newSol.SetDependentAsBinnary(start)
+		log.Println("solution constructed")
+		newSol.SetDependentAsBinnary(it)
 		mark := newSol.CountMark()
+		
 		log.Println("mark:", mark)
 
 		if solFlag{
@@ -157,7 +160,7 @@ func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solut
 				sol = &newSol
 				continue
 			} else {
-				log.Println("invalid disb for:", number)
+				log.Println("invalid disb for:", it)
 				continue
 			}
 		}
@@ -169,13 +172,14 @@ func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solut
 					sol = &newSol
 					continue
 				} else {
-					log.Println("low param for:", number, " new param:", newSol.Value, " old param:", sol.Value)
+					log.Println("low param for:", it, " new param:", newSol.Value, " old param:", sol.Value)
 				}
 			} else {
-				log.Println("invalid disb for:", number)
+				log.Println("invalid disb for:", it)
 			}
 		} else {
-			log.Println("low mark for:", number)
+			log.Println("low mark for:", it)
 		}
 	}
+	return sol
 }
