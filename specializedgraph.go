@@ -15,6 +15,11 @@ func (g *Graph) GetAmountOfIndependent() int {
 	return g.amountOfIndependent
 }
 
+//SetAmountOfIndependent sets amount of indepndent vertex in the graph
+func (g *Graph)SetAmountOfIndependent(am int){
+	g.amountOfIndependent = am
+}
+
 //NumIndependent renumberring vertex with some independetn subset of vertex
 func (g *Graph) NumIndependent() []int {
 	
