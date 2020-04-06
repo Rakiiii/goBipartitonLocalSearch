@@ -2,7 +2,6 @@ package lspartitioninglib
 
 import graphlib "github.com/Rakiiii/goGraph"
 import gotuple "github.com/Rakiiii/goTuple"
-import "fmt"
 
 //Graph if specialization of grpah for biderectional local search
 type Graph struct {
@@ -72,8 +71,6 @@ func (g *Graph)HungryNumIndependent()[]int{
 		fmt.Println(i.First," ",i.Second," ",i.Third)
 	}*/
 
-	fmt.Println()
-
 	optPointers := make([]int,g.AmountOfVertex())
 	for i,num := range sortedOrd{
 		optPointers[num.First] = i
@@ -133,7 +130,6 @@ func (g *Graph)GetDependentGraph()Graph{
 	for i := g.GetAmountOfIndependent();i < g.AmountOfVertex(); i++{
 		newSet := make([]int,0)
 		for _,v := range g.GetEdges(i){
-			fmt.Println(v)
 			if v > g.GetAmountOfIndependent(){
 				newSet = append(newSet,v-g.GetAmountOfIndependent())
 			}
