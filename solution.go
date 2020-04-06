@@ -111,3 +111,29 @@ func (s *Solution) CountParamForDependent() int64 {
 	}
 	return param / 2
 }
+
+//TranslateResultVector renum posirions of elems in @vec with new order @ord
+func TranslateResultVector(vec []bool,ord []int)[]bool{
+	formatedRes := make([]bool, len(ord))
+	for i, num := range ord {
+		if vec[i] {
+			formatedRes[num] = true
+		} else {
+			formatedRes[num] = false
+		}
+	}
+	return formatedRes
+}
+
+//TranslateResultVector renum posirions of elems in @vec with new order @ord
+func TranslateResultVectorToOut(vec []bool,ord []int)[]int{
+	formatedRes := make([]int, len(ord))
+	for i, num := range ord {
+		if vec[i] {
+			formatedRes[num] = 1
+		} else {
+			formatedRes[num] = 0
+		}
+	}
+	return formatedRes
+}

@@ -40,3 +40,39 @@ func TestCountParameter(t *testing.T){
 
 	fmt.Println("vector:",sol.Vector," parameter:",sol.CountParameter())
 }
+
+func TestTranslateResultVector(t *testing.T){
+	fmt.Println("Start TestTranslateResultVector")
+	old := []bool{true,true,true,true,false,false,false,false}
+	new := []bool{false,false,false,false,true,true,true,true}
+	ord := []int{4,5,6,7,0,1,2,3}
+	old = TranslateResultVector(old,ord)
+	checkFlag := true
+	for i,j := range old{
+		if j != new[i] {
+			t.Error("Wrong at pos:",i)
+			checkFlag = false
+		}
+	}
+	if checkFlag{
+		fmt.Println("TestTranslateResultVector=[ok]")
+	}
+}
+
+func TestTranslateResultVectorToOut(t *testing.T){
+	fmt.Println("Start TestTranslateResultVectorToOut")
+	old := []bool{true,true,true,true,false,false,false,false}
+	new := []int{0,0,0,0,1,1,1,1}
+	ord := []int{4,5,6,7,0,1,2,3}
+	sub := TranslateResultVectorToOut(old,ord)
+	checkFlag := true
+	for i,j := range sub{
+		if j != new[i] {
+			t.Error("Wrong at pos:",i)
+			checkFlag = false
+		}
+	}
+	if checkFlag{
+		fmt.Println("TestTranslateResultVectorToOut=[ok]")
+	}
+}
