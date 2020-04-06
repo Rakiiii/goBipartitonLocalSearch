@@ -8,12 +8,16 @@ github.com/Rakiiii/goGraph v0.2.3 h1:WI2GC8Mjp3qYBZyiTbJH5ZBooquRhRK/BERPLc0SZZU
 github.com/Rakiiii/goGraph v0.2.3/go.mod h1:bYAV6bGI3W/Q2pbO8wpCVywSbfjNNbvQ41WEdop3YAI=
 github.com/Rakiiii/goGraph v0.2.4 h1:lR6LyuVySOCb25rWZBr/XXPPS7KIaPuO8JjJ2xD3PhM=
 github.com/Rakiiii/goGraph v0.2.4/go.mod h1:bYAV6bGI3W/Q2pbO8wpCVywSbfjNNbvQ41WEdop3YAI=
+github.com/Rakiiii/goGraph v0.3.0 h1:uQ+34dDdDgTXBFt7jsCjyq3DdXOYXi5hijE7r2B40Ds=
+github.com/Rakiiii/goGraph v0.3.0/go.mod h1:KvIo/2YIIHJOCeMhZrVkymK9s2PSsjUJ3zh0EOEy1yU=
 github.com/Rakiiii/goPair v0.0.0-20191123194235-c325a5a98042 h1:M9rdRPnbChkp/2feFyg96qj8zQtnR8rVV4TJ2c+p0Xs=
 github.com/Rakiiii/goPair v0.0.0-20191123194235-c325a5a98042/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
 github.com/Rakiiii/goPair v0.0.2 h1:DtZiEtWgOr6VhgFE/EbMo7R3u78TZfPYk8ny8EB4I7M=
 github.com/Rakiiii/goPair v0.0.2/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
 github.com/Rakiiii/goSort v0.0.1 h1:LFZm5bcoHjtFjV53f+VV3HfM+AwOTZMQrrEQy2JNY6Y=
 github.com/Rakiiii/goSort v0.0.1/go.mod h1:ir50upjpORk43rGVd9Kt43JRoCWmtWiLmqEKnmO3EPw=
+github.com/Rakiiii/goSort v0.0.3 h1:s2wswcUQWi1d24UOPJ+w2YgmDHa9bDXn46JOi0dI1D0=
+github.com/Rakiiii/goSort v0.0.3/go.mod h1:ir50upjpORk43rGVd9Kt43JRoCWmtWiLmqEKnmO3EPw=
 github.com/Rakiiii/goTuple v0.0.1 h1:A7a/nQ7qHKb8q73lvcd3V3/WHuq7rhxCBo7z+Z0jmOc=
 github.com/Rakiiii/goTuple v0.0.1/go.mod h1:Rd9At49hIzWGStrhTKHdtZZOSY6z6w6kMEJFfRja3Uw=
 github.com/Rakiiii/goTuple v0.0.2 h1:R57kR4OFkHfGQvGIKZEKFJ7c/kkc3vDowgnE34CnubI=
