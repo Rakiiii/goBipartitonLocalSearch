@@ -11,7 +11,7 @@ type SafeValue struct {
 	Mux   sync.Mutex
 }
 
-func LSPartiotionAlgorithm(gr *Graph, sol *Solution, groupSize int, number int64) *Solution {
+func LSPartiotionAlgorithm(gr IGraph, sol *Solution, groupSize int, number int64) *Solution {
 	log.Println("Check number:", number)
 
 	if float64(number) >= math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent())) {
@@ -56,7 +56,7 @@ func LSPartiotionAlgorithm(gr *Graph, sol *Solution, groupSize int, number int64
 
 }
 
-func CheckPartition(graph *Graph, sol *Solution, groupSize int, number int64) *Solution {
+func CheckPartition(graph IGraph, sol *Solution, groupSize int, number int64) *Solution {
 	log.Println("Check number:", number)
 
 	var newSol Solution
@@ -98,7 +98,7 @@ func CheckPartition(graph *Graph, sol *Solution, groupSize int, number int64) *S
 }
 
 func AsyncCheckPartitionInRange(start int64, end int64, val *SafeValue, wg *sync.WaitGroup, ch chan *Solution,
-	graph *Graph, groupSize int) {
+	graph IGraph, groupSize int) {
 		log.Println("start new goroutine")
 	defer wg.Done()
 	
@@ -125,7 +125,7 @@ func AsyncCheckPartitionInRange(start int64, end int64, val *SafeValue, wg *sync
 
 }
 
-func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) *Solution {
+func CheckPartitionInRange(start int64, end int64, graph IGraph, groupSize int) *Solution {
 	var sol *Solution
 	for start <= end {
 		sol = CheckPartition(graph, sol, groupSize, start)
@@ -134,7 +134,7 @@ func CheckPartitionInRange(start int64, end int64, graph *Graph, groupSize int) 
 	return sol
 }
 
-func LSPartiotionAlgorithmNonRec(gr *Graph, sol *Solution, groupSize int) *Solution {
+func LSPartiotionAlgorithmNonRec(gr IGraph, sol *Solution, groupSize int) *Solution {
 	
 
 	var it int64 	

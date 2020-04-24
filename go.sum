@@ -1,3 +1,6 @@
+github.com/Rakiiii/goBipartitonLocalSearch v0.5.5/go.mod h1:pk2c62DBilpxilTjpbaAjbyIOC2YOCKO2CW0/R1fP1A=
+github.com/Rakiiii/goCoarseningGraphLib v0.1.2 h1:EngQKayDRHP0m6C7kZxc+pDGaogLdKYo7HKogYJBI4A=
+github.com/Rakiiii/goCoarseningGraphLib v0.1.2/go.mod h1:68JYfqvNFQ4e2dihqR0Ud+fW+Jd1py1qvPjYDQ8ij70=
 github.com/Rakiiii/goGraph v0.2.0 h1:aRYs7m9PN0b9isxM/9Io0vpUtIujwXpEoIhF1/wHEMw=
 github.com/Rakiiii/goGraph v0.2.0/go.mod h1:bYAV6bGI3W/Q2pbO8wpCVywSbfjNNbvQ41WEdop3YAI=
 github.com/Rakiiii/goGraph v0.2.1 h1:pv2m5+C1hJ0NrdnSl+bUzaz8Vx678+AdJZuAAp6jt6o=
@@ -16,6 +19,8 @@ github.com/Rakiiii/goPair v0.0.0-20191123194235-c325a5a98042 h1:M9rdRPnbChkp/2fe
 github.com/Rakiiii/goPair v0.0.0-20191123194235-c325a5a98042/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
 github.com/Rakiiii/goPair v0.0.2 h1:DtZiEtWgOr6VhgFE/EbMo7R3u78TZfPYk8ny8EB4I7M=
 github.com/Rakiiii/goPair v0.0.2/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
+github.com/Rakiiii/goPair v0.0.3 h1:96VjJnyvRpueXMZdnZ5HDOJdFO3mNOpCYsxTzIdpq8M=
+github.com/Rakiiii/goPair v0.0.3/go.mod h1:Jjb6f/SlM8GV5ySxvfySDs8UCOjtx5CJtmUoffpLD9I=
 github.com/Rakiiii/goSort v0.0.1 h1:LFZm5bcoHjtFjV53f+VV3HfM+AwOTZMQrrEQy2JNY6Y=
 github.com/Rakiiii/goSort v0.0.1/go.mod h1:ir50upjpORk43rGVd9Kt43JRoCWmtWiLmqEKnmO3EPw=
 github.com/Rakiiii/goSort v0.0.3 h1:s2wswcUQWi1d24UOPJ+w2YgmDHa9bDXn46JOi0dI1D0=
