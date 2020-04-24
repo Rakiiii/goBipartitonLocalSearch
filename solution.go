@@ -9,12 +9,12 @@ import (
 type Solution struct {
 	Value  int64
 	Vector []bool
-	Gr     *Graph
+	Gr     IGraph
 	mark   []pairlib.IntPair
 }
 
 //Init initialized solution for graph
-func (s *Solution) Init(g *Graph) {
+func (s *Solution) Init(g IGraph) {
 	s.Value = -1
 	s.Gr = g
 	s.Vector = make([]bool, g.AmountOfVertex())

@@ -3,6 +3,22 @@ package lspartitioninglib
 import graphlib "github.com/Rakiiii/goGraph"
 import gotuple "github.com/Rakiiii/goTuple"
 
+type IGraph interface{
+	//must implement default graph interface
+	graphlib.IGraph
+	//must return amount of independet vertex in grpah
+	GetAmountOfIndependent()int
+	//must set amount of independent vertex in graph
+	SetAmountOfIndependent(int)
+	//must renum vertex in graph in way that firstly must be independent vertx
+	NumIndependent() []int
+	HungryNumIndependent()[]int
+	//must parse grpah from @param file of metis format
+	ParseGraph(string) error
+	//must return graph inisiated with dependent vertex set
+	GetDependentGraph()Graph
+}
+
 //Graph if specialization of grpah for biderectional local search
 type Graph struct {
 	graphlib.Graph
