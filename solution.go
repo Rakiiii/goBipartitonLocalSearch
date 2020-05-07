@@ -80,7 +80,6 @@ func (s *Solution) CountMark() int64 {
 
 //PartIndependent parts independent vertexes in hungry form
 func (s *Solution) PartIndependent(groupSize int) bool {
-	s.mark = pairlib.ReversIntPairSlice(pairlib.QuicksortIntPairSecond(s.mark))
 
 	groupTwoSize := 0
 
@@ -89,6 +88,8 @@ func (s *Solution) PartIndependent(groupSize int) bool {
 			groupTwoSize++
 		}
 	}
+
+	s.mark = pairlib.ReversIntPairSlice(pairlib.QuicksortIntPairSecond(s.mark))
 
 	if groupSize-groupTwoSize < 0 || groupSize-groupTwoSize > s.Gr.GetAmountOfIndependent() {
 		return false
@@ -113,7 +114,7 @@ func (s *Solution) CountParamForDependent() int64 {
 }
 
 //TranslateResultVector renum posirions of elems in @vec with new order @ord
-func TranslateResultVector(vec []bool,ord []int)[]bool{
+func TranslateResultVector(vec []bool, ord []int) []bool {
 	formatedRes := make([]bool, len(ord))
 	for i, num := range ord {
 		if vec[i] {
@@ -126,7 +127,7 @@ func TranslateResultVector(vec []bool,ord []int)[]bool{
 }
 
 //TranslateResultVector renum posirions of elems in @vec with new order @ord
-func TranslateResultVectorToOut(vec []bool,ord []int)[]int{
+func TranslateResultVectorToOut(vec []bool, ord []int) []int {
 	formatedRes := make([]int, len(ord))
 	for i, num := range ord {
 		if vec[i] {
