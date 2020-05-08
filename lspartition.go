@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"math"
+	"os"
 	"sync"
 )
 
@@ -187,9 +188,11 @@ func LSPartiotionAlgorithmNonRec(gr IGraph, sol *Solution, groupSize int) *Solut
 
 //LSPartiotionAlgorithmCountStatistic only for statistic counting
 func LSPartiotionAlgorithmCountStatistic(gr IGraph, sol *Solution, groupSize int) *Solution {
+	f, _ := os.Create("trash")
+	log.SetOutput(f)
 	var it int64
 
-	Statistic.m[AmountOfItterations] = int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent())))
+	Statistic.m[AmountOfItterations] += int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent())))
 
 	for it = 0; it < int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent()))); it++ {
 		newSol := new(Solution)
@@ -231,6 +234,11 @@ func LSPartiotionAlgorithmCountStatistic(gr IGraph, sol *Solution, groupSize int
 				log.Println("invalid disb for:", it)
 			}
 		} else {
+			der := mark - sol.Value
+			if der == 1 {
+				Statistic.m[MarkOneDerivative]++
+			}
+			Statistic.m[OverallMarkDerivative] += der
 			Statistic.m[AmountOfTrueMark]++
 			log.Println("low mark for:", it)
 		}
@@ -256,6 +264,7 @@ func LSPartiotionAlgorithmNonRecFast(gr IGraph, sol *Solution, groupSize int) *S
 		if sol == nil {
 			if flag := newSol.PartIndependent(groupSize); flag {
 				sol = newSol
+				sol.CountParameter()
 				continue
 			} else {
 				continue
