@@ -89,11 +89,11 @@ func (s *Solution) PartIndependent(groupSize int) bool {
 		}
 	}
 
-	s.mark = pairlib.ReversIntPairSlice(pairlib.QuicksortIntPairSecond(s.mark))
-
 	if groupSize-groupTwoSize < 0 || groupSize-groupTwoSize > s.Gr.GetAmountOfIndependent() {
 		return false
 	}
+
+	s.mark = pairlib.ReversIntPairSlice(pairlib.QuicksortIntPairSecond(s.mark))
 	for i := 0; i < groupSize-groupTwoSize; i++ {
 		s.Vector[s.mark[i].First] = true
 	}
