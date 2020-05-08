@@ -7,6 +7,8 @@ const (
 	AmountOfFalseMark      = "amountoffalsemark"
 	AmountOfDisbalanceFail = "amountofdisbfail"
 	AmountOfParamFail      = "amountofparamfail"
+	OverallMarkDerivative  = "overallmarkderivative"
+	MarkOneDerivative      = "markonederivative"
 )
 
 type stats struct {
@@ -15,6 +17,12 @@ type stats struct {
 
 func (s *stats) GetStats() *map[string]int64 {
 	return &(s.m)
+}
+
+func (s *stats) Zero() {
+	for k, _ := range s.m {
+		s.m[k] = 0
+	}
 }
 
 var Statistic = stats{m: make(map[string]int64)}
