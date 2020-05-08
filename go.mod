@@ -6,6 +6,5 @@ require (
 	github.com/Rakiiii/goCoarseningGraphLib v0.1.2 // indirect
 	github.com/Rakiiii/goGraph v0.3.2
 	github.com/Rakiiii/goPair v0.0.3
-	github.com/Rakiiii/goSort v0.0.3
 	github.com/Rakiiii/goTuple v0.0.3
 )
