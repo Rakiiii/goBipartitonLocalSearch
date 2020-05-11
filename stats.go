@@ -1,14 +1,16 @@
 package lspartitioninglib
 
 const (
-	AmountOfItterations    = "amountofitteration"
-	AmountOfTrueMark       = "amountoftruemark"
-	AmountOfMarkCount      = "amountofmarkcount"
-	AmountOfFalseMark      = "amountoffalsemark"
-	AmountOfDisbalanceFail = "amountofdisbfail"
-	AmountOfParamFail      = "amountofparamfail"
-	OverallMarkDerivative  = "overallmarkderivative"
-	MarkOneDerivative      = "markonederivative"
+	AmountOfItterations           = "amountofitteration"
+	AmountOfTrueMark              = "amountoftruemark"
+	AmountOfMarkCount             = "amountofmarkcount"
+	AmountOfFalseMark             = "amountoffalsemark"
+	AmountOfDisbalanceFail        = "amountofdisbfail"
+	AmountOfParamFail             = "amountofparamfail"
+	OverallMarkDerivative         = "overallmarkderivative"
+	MarkOneDerivative             = "markonederivative"
+	OverallMarkDerivativeFromBest = "overallmarkderivativefrombest"
+	AmountOfMarkDerivativeIn0To5  = "amountofmarkderivativein0to5"
 )
 
 type stats struct {
