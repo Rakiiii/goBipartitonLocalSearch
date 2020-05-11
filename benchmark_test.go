@@ -7,12 +7,15 @@ import (
 )
 
 const (
-	graph_bench = "graph_bench"
+	graph_bench_1     = "graph_bench_1"
+	graph_bench_1_opt = int64(14)
+	graph_bench_2     = "graph_bench_2"
+	graph_bench_2_opt = int64(14)
 )
 
 func BenchmarkLSPartiotionAlgorithmNonRec(b *testing.B) {
 	var graph Graph
-	if err := graph.ParseGraph(graph_bench); err != nil {
+	if err := graph.ParseGraph(graph_bench_1); err != nil {
 		log.Println(err)
 		return
 	}
@@ -31,7 +34,7 @@ func BenchmarkLSPartiotionAlgorithmNonRec(b *testing.B) {
 
 func BenchmarkLSPartiotionAlgorithmNonRecFast(b *testing.B) {
 	var graph Graph
-	if err := graph.ParseGraph(graph_bench); err != nil {
+	if err := graph.ParseGraph(graph_bench_1); err != nil {
 		log.Println(err)
 		return
 	}
@@ -49,7 +52,7 @@ func BenchmarkLSPartiotionAlgorithmNonRecFast(b *testing.B) {
 
 func BenchmarkLSPartiotionAlgorithmNonRecStatistic(b *testing.B) {
 	var graph Graph
-	if err := graph.ParseGraph(graph_bench); err != nil {
+	if err := graph.ParseGraph(graph_bench_2); err != nil {
 		log.Println(err)
 		return
 	}
@@ -58,7 +61,7 @@ func BenchmarkLSPartiotionAlgorithmNonRecStatistic(b *testing.B) {
 
 	graph.HungryNumIndependent()
 	for j := 0; j < b.N; j++ {
-		LSPartiotionAlgorithmCountStatistic(&graph, nil, groupSize)
+		LSPartiotionAlgorithmCountStatistic(&graph, nil, groupSize, graph_bench_2_opt)
 	}
 
 	fmt.Println("persent of true mark:", float64(Statistic.m[AmountOfTrueMark])/float64(Statistic.m[AmountOfMarkCount]))
@@ -67,4 +70,6 @@ func BenchmarkLSPartiotionAlgorithmNonRecStatistic(b *testing.B) {
 	fmt.Println("persent of param fail:", float64(Statistic.m[AmountOfParamFail])/float64(Statistic.m[AmountOfItterations]))
 	fmt.Println("midlle Mark Derivative:", float64(Statistic.m[OverallMarkDerivative])/float64(Statistic.m[AmountOfTrueMark]))
 	fmt.Println("persent of one-s mark derivative:", float64(Statistic.m[MarkOneDerivative])/float64(Statistic.m[AmountOfMarkCount]))
+	fmt.Println("persent of derivative in 0 to 4 from best:", float64(Statistic.m[AmountOfMarkDerivativeIn0To5])/float64(Statistic.m[AmountOfMarkCount]))
+	fmt.Println("midlle mark derivative from best:", float64(Statistic.m[OverallMarkDerivativeFromBest])/float64(Statistic.m[AmountOfMarkCount]))
 }
