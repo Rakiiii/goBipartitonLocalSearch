@@ -187,7 +187,7 @@ func LSPartiotionAlgorithmNonRec(gr IGraph, sol *Solution, groupSize int) *Solut
 }
 
 //LSPartiotionAlgorithmCountStatistic only for statistic counting
-func LSPartiotionAlgorithmCountStatistic(gr IGraph, sol *Solution, groupSize int) *Solution {
+func LSPartiotionAlgorithmCountStatistic(gr IGraph, sol *Solution, groupSize int, best int64) *Solution {
 	f, _ := os.Create("trash")
 	log.SetOutput(f)
 	var it int64
@@ -235,8 +235,13 @@ func LSPartiotionAlgorithmCountStatistic(gr IGraph, sol *Solution, groupSize int
 			}
 		} else {
 			der := mark - sol.Value
-			if der == 1 {
+			if der <= 1 {
 				Statistic.m[MarkOneDerivative]++
+			}
+			derFromBest := mark - best
+			Statistic.m[OverallMarkDerivativeFromBest] += derFromBest
+			if derFromBest <= 5 {
+				Statistic.m[AmountOfMarkDerivativeIn0To5]++
 			}
 			Statistic.m[OverallMarkDerivative] += der
 			Statistic.m[AmountOfTrueMark]++
