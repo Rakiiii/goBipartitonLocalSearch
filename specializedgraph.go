@@ -163,7 +163,6 @@ func (g *Graph) GetDependentGraph() Graph {
 				newSet = append(newSet, v-g.GetAmountOfIndependent())
 			}
 		}
-
 		newGraph.AddVertexWithEdges(newSet)
 	}
 
