@@ -8,7 +8,7 @@ import (
 
 func TestLSPartiotionAlgorithmNonRec(t *testing.T) {
 	fmt.Println("Start TestLSPartiotionAlgorithmNonRec")
-	var graph Graph
+	graph := *NewGraph()
 	if err := graph.ParseGraph("testgraph"); err != nil {
 		log.Println(err)
 		return
@@ -29,7 +29,7 @@ func TestLSPartiotionAlgorithmNonRec(t *testing.T) {
 
 func TestLSPartiotionAlgorithm(t *testing.T) {
 	fmt.Println("Start TestLSPartiotionAlgorithm")
-	var graph Graph
+	graph := *NewGraph()
 	if err := graph.ParseGraph("testgraph"); err != nil {
 		log.Println(err)
 		return
@@ -51,7 +51,7 @@ func TestLSPartiotionAlgorithm(t *testing.T) {
 
 func TestLSPartiotionAlgorithmNonRecFast(t *testing.T) {
 	fmt.Println("Start TestLSPartiotionAlgorithmNonRecFast")
-	var graph Graph
+	graph := *NewGraph()
 	if err := graph.ParseGraph("testgraph"); err != nil {
 		log.Println(err)
 		return
