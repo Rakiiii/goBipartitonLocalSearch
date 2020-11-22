@@ -39,6 +39,13 @@ func NewGraph() *Graph {
 	return NewGraphFromBase(baseGraph)
 }
 
+//NewGraph returns new empty lspartitionable graph that decorates graphlib.FastGraph
+func NewGraphFast() *Graph {
+	baseGraph := &graphlib.FastGraph{}
+	baseGraph.Init(0, 0)
+	return NewGraphFromBase(baseGraph)
+}
+
 //GetAmountOfIndependent returns amount of independent vertex in the graph
 func (g *Graph) GetAmountOfIndependent() int {
 	return g.amountOfIndependent

@@ -14,7 +14,7 @@ const (
 )
 
 func BenchmarkLSPartiotionAlgorithmNonRec(b *testing.B) {
-	var graph Graph
+	graph := *NewGraph()
 	if err := graph.ParseGraph(graph_bench_1); err != nil {
 		log.Println(err)
 		return
@@ -33,7 +33,7 @@ func BenchmarkLSPartiotionAlgorithmNonRec(b *testing.B) {
 }
 
 func BenchmarkLSPartiotionAlgorithmNonRecFast(b *testing.B) {
-	var graph Graph
+	graph := *NewGraph()
 	if err := graph.ParseGraph(graph_bench_1); err != nil {
 		log.Println(err)
 		return
@@ -48,10 +48,18 @@ func BenchmarkLSPartiotionAlgorithmNonRecFast(b *testing.B) {
 	}
 	fmt.Println(res.Value)
 	fmt.Println(res.Vector)
+	for _, i := range res.Vector {
+		if i {
+			fmt.Print("1 ")
+		} else {
+			fmt.Print("0 ")
+		}
+	}
 }
 
 func BenchmarkLSPartiotionAlgorithmNonRecStatistic(b *testing.B) {
-	var graph Graph
+	b.Skip()
+	graph := *NewGraph()
 	if err := graph.ParseGraph(graph_bench_2); err != nil {
 		log.Println(err)
 		return
