@@ -13,6 +13,21 @@ type Solution struct {
 	mark   []pairlib.IntPair
 }
 
+//GetValue implements ISolution
+func (s *Solution) GetValue() int64 {
+	return s.Value
+}
+
+//GetVector implements ISolution
+func (s *Solution) GetVector() []bool {
+	return s.Vector
+}
+
+//GetGraph implements ISolution
+func (s *Solution) GetGraph() IGraph {
+	return s.Gr
+}
+
 //Init initialized solution for graph
 func (s *Solution) Init(g IGraph) {
 	s.Value = -1
@@ -111,6 +126,14 @@ func (s *Solution) CountParamForDependent() int64 {
 		}
 	}
 	return param / 2
+}
+
+func (s *Solution) SetSolution(sol ISolution) {
+	s.Vector = make([]bool, len(sol.GetVector()))
+	for i := 0; i < len(sol.GetVector()); i++ {
+		s.Vector[i] = sol.GetVector()[i]
+	}
+	s.Value = sol.GetValue()
 }
 
 //TranslateResultVector renum posirions of elems in @vec with new order @ord

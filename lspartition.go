@@ -285,3 +285,61 @@ func LSPartiotionAlgorithmNonRecFast(gr IGraph, sol *Solution, groupSize int) *S
 	}
 	return sol
 }
+
+func ThreeLevelPartiotionAlgorithmNonRec(gr IGraph, s ISolution, groupSize int, thirdLevelDeepnes int) ISolution {
+	ord := gr.NumDependentOptimalThirdLevel()
+	var sol *Solution
+	if s == nil {
+		sol = nil
+	} else {
+		sol.Init(gr)
+		sol.SetSolution(s)
+	}
+
+	var it int64
+
+	if thirdLevelDeepnes < 1 {
+		log.Panic(errors.New("Third level deepnes couldn't be less then 1"))
+	}
+	if sol != nil && sol.GetValue() == -1 {
+		log.Panic(errors.New("Value is not inited in start solution"))
+	}
+
+	subOrd := gr.NumThreeLevel(thirdLevelDeepnes)
+	newSol := new(ThreeLevelSolution)
+	newSol.Init(gr, thirdLevelDeepnes)
+
+	for it = 0; it < int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent()-thirdLevelDeepnes))); it++ {
+		newSol.ReInit()
+
+		newSol.SetDependentAsBinnarySecondLevel(it)
+		newSol.cacheSubSetMark()
+
+		var subIt int64
+		for subIt = 0; subIt < int64(math.Pow(2, float64(thirdLevelDeepnes))); subIt++ {
+			newSol.ClearSub()
+			newSol.SetDependentAsBinnaryThirdLevel(subIt)
+			newSol.OverCountThirdLevel()
+			if sol == nil {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					newSol.CountParameter()
+					sol = new(Solution)
+					sol.Init(gr)
+					sol.SetSolution(newSol)
+					continue
+				} else {
+					continue
+				}
+			}
+			if newSol.CountMark() < sol.GetValue() {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					if newSol.CountParameter() < sol.GetValue() {
+						sol.SetSolution(newSol)
+					}
+				}
+			}
+		}
+	}
+	sol.Vector = TranslateResultVector(TranslateResultVector(sol.Vector, subOrd), ord)
+	return sol
+}
