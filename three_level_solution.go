@@ -229,7 +229,7 @@ func (s *ThreeLevelSolution) PartIndependent(groupSize int) bool {
 	lastMap := make(map[int]int, 0)
 	minNumberOfNotCounted := s.Gr.GetAmountOfIndependent() - s.Gr.GetThirdLevelSize()
 	for i, p := range s.lastVertex {
-		lastMap[p.Second-p.First] = minNumberOfNotCounted + i
+		lastMap[minNumberOfNotCounted+i] = p.Second - p.First
 	}
 	var res int = 0
 	position := 0
@@ -259,25 +259,25 @@ func (s *ThreeLevelSolution) PartIndependent(groupSize int) bool {
 
 func checkContains(m map[int]int, val int) int {
 	for key, value := range m {
-		if key < val {
+		if value < val {
 			delete(m, key)
-			return value
+			return key
 		}
 	}
 	return -1
 }
 
 func getSmallest(m map[int]int) int {
-	minKey := math.MaxInt32
-	val := -1
+	minValue := math.MaxInt32
+	dKey := -1
 	for key, value := range m {
-		if key < minKey {
-			minKey = key
-			val = value
+		if value < minValue {
+			minValue = value
+			dKey = key
 		}
 	}
-	delete(m, minKey)
-	return val
+	delete(m, dKey)
+	return dKey
 }
 
 //CountParamForDependent counting param for subgraph containted dependent vertexes
