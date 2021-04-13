@@ -287,14 +287,14 @@ func LSPartiotionAlgorithmNonRecFast(gr IGraph, sol *Solution, groupSize int) *S
 }
 
 //ThreeLevelPartiotionAlgorithmNonRec Method of graph partitioning with 3-level alg
-func ThreeLevelPartiotionAlgorithmNonRec(gr IGraph, s ISolution, groupSize int, thirdLevelDeepnes int) ISolution {
+func ThreeLevelPartiotionAlgorithmNonRec(gr IGraph, sa ISolution, groupSize int, thirdLevelDeepnes int) ISolution {
 	ord := gr.NumDependentOptimalThirdLevel()
-	var sol *Solution
-	if s == nil {
+	sol := new(Solution)
+	if sa == nil {
 		sol = nil
 	} else {
 		sol.Init(gr)
-		sol.SetSolution(s)
+		sol.SetSolution(sa)
 	}
 
 	var it int64
