@@ -2,6 +2,7 @@ package lspartitioninglib
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"math"
 	"os"
@@ -339,6 +340,204 @@ func ThreeLevelPartiotionAlgorithmNonRec(gr IGraph, sa ISolution, groupSize int,
 					}
 				}
 			}
+		}
+	}
+	sol.Vector = TranslateResultVector(TranslateResultVector(sol.Vector, subOrd), ord)
+	return sol
+}
+
+//ThreeLevelPartiotionAlgorithmNonRec Method of graph partitioning with 3-level alg
+func ThreeLevelPartiotionAlgorithmNonRecLogged(gr IGraph, sa ISolution, groupSize int, thirdLevelDeepnes int) ISolution {
+	ord := gr.NumDependentOptimalThirdLevel()
+	fmt.Println("dependent ord:", ord)
+	sol := new(Solution)
+	if sa == nil {
+		sol = nil
+	} else {
+		sol.Init(gr)
+		sol.SetSolution(sa)
+	}
+
+	var it int64
+
+	if thirdLevelDeepnes < 1 {
+		log.Panic(errors.New("Third level deepnes couldn't be less then 1"))
+	}
+	if sol != nil && sol.GetValue() == -1 {
+		log.Panic(errors.New("Value is not inited in start solution"))
+	}
+
+	subOrd := gr.NumThreeLevel(thirdLevelDeepnes)
+	fmt.Println("independent ord:", subOrd)
+	newSol := new(ThreeLevelSolution)
+	newSol.Init(gr, thirdLevelDeepnes)
+
+	for it = 0; it < int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent()-thirdLevelDeepnes))); it++ {
+		newSol.ReInit()
+
+		newSol.SetDependentAsBinnarySecondLevel(it)
+		newSol.cacheSubSetMark()
+
+		var subIt int64
+		for subIt = 0; subIt < int64(math.Pow(2, float64(thirdLevelDeepnes))); subIt++ {
+			newSol.ClearSub()
+			newSol.SetDependentAsBinnaryThirdLevel(subIt)
+			newSol.OverCountThirdLevel()
+			if sol == nil {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					newSol.CountParameter()
+					sol = new(Solution)
+					sol.Init(gr)
+					sol.SetSolution(newSol)
+					fmt.Println("solution:", newSol)
+					continue
+				} else {
+					continue
+				}
+			}
+			fmt.Println("solution:", newSol, " MARK:", newSol.CountMark(), " SOL:", sol.GetValue(), " submark:", newSol.subMark, " param for dependent:", newSol.CountParamForDependent(), " mark sub set:", newSol.mark)
+			if newSol.CountMark() < sol.GetValue() {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					fmt.Println("FLAG true", "solution:", newSol, " param:", newSol.CountParameter())
+					if newSol.CountParameter() < sol.GetValue() {
+						sol.SetSolution(newSol)
+						fmt.Println("solution:", newSol)
+					}
+				}
+				fmt.Println("FLAG false")
+			}
+		}
+	}
+	sol.Vector = TranslateResultVector(TranslateResultVector(sol.Vector, subOrd), ord)
+	return sol
+}
+
+//ThreeLevelPartiotionAlgorithmNonRec Method of graph partitioning with 3-level alg
+func ThreeLevelPartiotionAlgorithmNonRecWithGraphCache(gr IGraph, sa ISolution, groupSize int, thirdLevelDeepnes int) ISolution {
+	ord := gr.NumDependentOptimalThirdLevel()
+	sol := new(Solution)
+	if sa == nil {
+		sol = nil
+	} else {
+		sol.Init(gr)
+		sol.SetSolution(sa)
+	}
+
+	var it int64
+
+	if thirdLevelDeepnes < 1 {
+		log.Panic(errors.New("Third level deepnes couldn't be less then 1"))
+	}
+	if sol != nil && sol.GetValue() == -1 {
+		log.Panic(errors.New("Value is not inited in start solution"))
+	}
+
+	subOrd := gr.NumThreeLevel(thirdLevelDeepnes)
+	newSol := new(ThreeLevelSolution)
+	newSol.Init(gr, thirdLevelDeepnes)
+	newSol.constructSubGraph()
+
+	for it = 0; it < int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent()-thirdLevelDeepnes))); it++ {
+		newSol.ReInit()
+
+		newSol.SetDependentAsBinnarySecondLevel(it)
+		newSol.cacheSubSetMark()
+
+		var subIt int64
+		for subIt = 0; subIt < int64(math.Pow(2, float64(thirdLevelDeepnes))); subIt++ {
+			newSol.ClearSub()
+			newSol.SetDependentAsBinnaryThirdLevel(subIt)
+			newSol.OverCountThirdLevelWithSubgraph()
+			if sol == nil {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					newSol.CountParameter()
+					sol = new(Solution)
+					sol.Init(gr)
+					sol.SetSolution(newSol)
+					continue
+				} else {
+					continue
+				}
+			}
+			if newSol.CountMark() < sol.GetValue() {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					if newSol.CountParameter() < sol.GetValue() {
+						sol.SetSolution(newSol)
+					}
+				}
+			}
+		}
+	}
+	sol.Vector = TranslateResultVector(TranslateResultVector(sol.Vector, subOrd), ord)
+	return sol
+}
+
+//ThreeLevelPartiotionAlgorithmNonRec Method of graph partitioning with 3-level alg
+func FourLevelPartiotionAlgorithmNonRec(gr IGraph, sa ISolution, groupSize int, thirdLevelDeepnes int) ISolution {
+	ord := gr.NumDependentOptimalThirdLevel()
+	sol := new(Solution)
+	if sa == nil {
+		sol = nil
+	} else {
+		sol.Init(gr)
+		sol.SetSolution(sa)
+	}
+
+	var it int64
+
+	if thirdLevelDeepnes < 1 {
+		log.Panic(errors.New("Third level deepnes couldn't be less then 1"))
+	}
+	if sol != nil && sol.GetValue() == -1 {
+		log.Panic(errors.New("Value is not inited in start solution"))
+	}
+
+	subOrd := gr.NumThreeLevel(thirdLevelDeepnes)
+	newSol := new(FourLevelSolution)
+	newSol.Init(gr, thirdLevelDeepnes)
+	newSol.constructSubGraph()
+
+	for it = 0; it < int64(math.Pow(2, float64(gr.AmountOfVertex()-gr.GetAmountOfIndependent()-thirdLevelDeepnes))); it++ {
+		newSol.ReInit()
+
+		newSol.SetDependentAsBinnarySecondLevel(it)
+		newSol.cacheSubSetMark()
+
+		var subIt int64
+		for subIt = 0; subIt < int64(math.Pow(2, float64(thirdLevelDeepnes))); subIt++ {
+			//checke is recount vector posible
+			if newSol.isSetted {
+				//if possible drop
+				newSol.ClearSub()
+				//set dependent
+				newSol.SetDependentAsBinnaryThirdLevel(subIt)
+				//recount
+				newSol.updateDiffBySize(newSol.countDiffSize())
+			} else {
+				newSol.ThreeLevelSolution.ClearSub()
+				newSol.SetDependentAsBinnaryThirdLevel(subIt)
+				//count
+				newSol.OverCountThirdLevelWithSubgraph()
+			}
+			if sol == nil {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					newSol.CountParameter()
+					sol = new(Solution)
+					sol.Init(gr)
+					sol.SetSolution(newSol)
+					continue
+				} else {
+					continue
+				}
+			}
+			if newSol.CountMark() < sol.GetValue() {
+				if flag := newSol.PartIndependent(groupSize); flag {
+					if newSol.CountParameter() < sol.GetValue() {
+						sol.SetSolution(newSol)
+					}
+				}
+			}
+			newSol.cacheVector()
 		}
 	}
 	sol.Vector = TranslateResultVector(TranslateResultVector(sol.Vector, subOrd), ord)

@@ -136,6 +136,18 @@ func (s *Solution) SetSolution(sol ISolution) {
 	s.Value = sol.GetValue()
 }
 
+func (s *Solution) String() string {
+	var res string
+	for _, b := range s.Vector {
+		if b {
+			res += "1 "
+		} else {
+			res += "0 "
+		}
+	}
+	return res
+}
+
 //TranslateResultVector renum posirions of elems in @vec with new order @ord
 func TranslateResultVector(vec []bool, ord []int) []bool {
 	formatedRes := make([]bool, len(ord))

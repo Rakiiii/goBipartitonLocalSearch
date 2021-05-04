@@ -12,6 +12,7 @@ type ThreeLevelSolution struct {
 	Value           int64
 	Vector          []bool
 	Gr              IGraph
+	subgraph        IGraph
 	levelSize       int
 	mark            []pairlib.IntPair
 	subMark         int64
@@ -179,6 +180,37 @@ func (s *ThreeLevelSolution) SetDependentAsBinnaryThirdLevel(num int64) {
 	}
 }
 
+func (s *ThreeLevelSolution) constructSubGraph() {
+	s.subgraph = NewGraphFast()
+	minNumberOfNotCounted := s.Gr.GetAmountOfIndependent() - s.Gr.GetThirdLevelSize()
+	i := len(s.Vector) - 1
+	for ; i > len(s.Vector)-1-s.levelSize; i-- {
+		edges := make([]int, 0)
+		for _, v := range s.Gr.GetEdges(i) {
+			switch {
+			case v >= s.Gr.GetAmountOfIndependent() || v < minNumberOfNotCounted:
+			default:
+				edges = append(edges, v)
+			}
+		}
+		s.subgraph.AddVertexWithEdges(edges)
+	}
+}
+
+func (s *ThreeLevelSolution) OverCountThirdLevelWithSubgraph() {
+	minNumberOfNotCounted := s.Gr.GetAmountOfIndependent() - s.Gr.GetThirdLevelSize()
+	offset := s.Gr.AmountOfVertex() - s.levelSize
+	for i := len(s.Vector) - 1; i < len(s.Vector)-1-s.levelSize; i-- {
+		for _, v := range s.subgraph.GetEdges(i - offset) {
+			if !s.Vector[i] {
+				s.lastVertex[v-minNumberOfNotCounted].First++
+			} else {
+				s.lastVertex[v-minNumberOfNotCounted].Second++
+			}
+		}
+	}
+}
+
 func (s *ThreeLevelSolution) OverCountThirdLevel() {
 	minNumberOfNotCounted := s.Gr.GetAmountOfIndependent() - s.Gr.GetThirdLevelSize()
 	i := len(s.Vector) - 1
@@ -188,7 +220,7 @@ func (s *ThreeLevelSolution) OverCountThirdLevel() {
 			case v >= s.Gr.GetAmountOfIndependent() || v < minNumberOfNotCounted:
 			case !s.Vector[i]:
 				s.lastVertex[v-minNumberOfNotCounted].First++
-			case s.Vector[v]:
+			case s.Vector[i]:
 				s.lastVertex[v-minNumberOfNotCounted].Second++
 			}
 		}
@@ -259,7 +291,7 @@ func (s *ThreeLevelSolution) PartIndependent(groupSize int) bool {
 
 func checkContains(m map[int]int, val int) int {
 	for key, value := range m {
-		if value < val {
+		if value > val {
 			delete(m, key)
 			return key
 		}
@@ -291,4 +323,16 @@ func (s *ThreeLevelSolution) CountParamForDependent() int64 {
 		}
 	}
 	return param / 2
+}
+
+func (s *ThreeLevelSolution) String() string {
+	var res string
+	for _, b := range s.Vector {
+		if b {
+			res += "1 "
+		} else {
+			res += "0 "
+		}
+	}
+	return res
 }
