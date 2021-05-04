@@ -2,6 +2,7 @@ package lspartitioninglib
 
 //Solution is struct that represent the solution of graph bipartition
 //contains graph it self and vector with solution with value
+//can reount it self between diff states
 type FourLevelSolution struct {
 	ThreeLevelSolution
 	vectorDependendentCache []bool
